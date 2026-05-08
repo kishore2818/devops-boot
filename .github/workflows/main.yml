@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy to EC2
+      - name: Deploy to EC2 Server
         uses: appleboy/ssh-action@v1.0.3
 
         with:
@@ -25,3 +25,7 @@ jobs:
             cd ${{ secrets.APP_PATH }}
 
             git pull origin main
+
+            sudo cp index.html /var/www/html/index.html
+
+            sudo systemctl restart nginx
